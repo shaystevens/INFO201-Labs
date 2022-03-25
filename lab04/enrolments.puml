@@ -1,0 +1,23 @@
+@startuml enrolment
+actor :Course\nApprover: as Approver
+actor :Student: as Student
+actor :International\nStudent: as International
+actor :Judge: as Judge
+
+usecase (Enrol at\nMusic School) as EnrolSchool
+usecase (Enrol in\nPaper) as EnrolPaper
+usecase (Visa\nCheck) as Visa
+usecase (Audition) as Audition
+usecase (Tuition\nfees) as Tuition
+
+Student -- Audition
+Student -- Tuition 
+Approver -- EnrolSchool
+Judge -- Audition
+Student <|-- International
+Audition .> EnrolSchool : <<include>>
+Tuition .> EnrolSchool : <<include>>
+EnrolSchool <.. Visa : <<extend>>
+EnrolSchool .> EnrolPaper : <<include>>
+International - Visa
+@enduml
