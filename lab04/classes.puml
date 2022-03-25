@@ -1,0 +1,16 @@
+@startuml hire
+actor :Student: as Student
+actor :Lecturer: as Lecturer
+actor :Tutor: as Tutor
+
+usecase (Class) as Class
+usecase (Tutorial) as Tutorial
+usecase (Schedule) as Schedule
+
+Schedule .> Class : <<include>>
+Schedule .> Tutorial : <<include>>
+Student -- Class
+Student -- Tutorial
+Tutor -- Tutorial
+Class -- Lecturer
+@enduml
