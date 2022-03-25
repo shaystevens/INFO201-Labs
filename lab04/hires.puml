@@ -1,0 +1,22 @@
+@startuml hire
+actor :Student: as Student
+actor :Instrument Staff: as Staff
+
+usecase (Register) as Register
+usecase (Instrument History) as History
+usecase (Lend\nInstrument) as Lend
+usecase (Return\nInstrument) as Return
+usecase (Hire fees) as Hire
+usecase (Return fees) as Fees
+usecase (Instrument Number) as Number
+
+Return -- Staff
+History .> Lend : <<include>>
+Number .> Lend : <<include>>
+Hire .> Lend : <<include>>
+Fees .> Return : <<extends>>
+Student -- Register
+Return -- Student
+Lend -- Student
+Lend -- Staff
+@enduml
