@@ -1,0 +1,27 @@
+@startuml student-enrol
+
+skinparam guillemet false
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam style strictuml
+skinparam classArrowFontSize 10
+skinparam classFontStyle bold
+skinparam SwimlaneBorderThickness 0
+
+skinparam activity {
+  hide empty description
+}
+
+|\t|
+start
+if (Are there marks to record?) then ([No])
+    stop
+    else (\t[Yes])
+    :Record marks in database;
+    repeat
+    :Check marks;
+    repeat while(Are marks correct?) is (\t[No])
+    ->[Yes];
+    |\t|
+    :Release marks to students;
+    stop

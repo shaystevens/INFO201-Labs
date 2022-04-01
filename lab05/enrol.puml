@@ -1,0 +1,27 @@
+@startuml student-enrol
+
+skinparam guillemet false
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam style strictuml
+skinparam classArrowFontSize 10
+skinparam classFontStyle bold
+skinparam SwimlaneBorderThickness 0
+
+skinparam activity {
+  hide empty description
+}
+
+|\t|
+start
+repeat
+repeat while(Audition) is (\t[fail])
+->[pass];
+  |\l|
+  :Enrol in class;
+  |\t|
+  :Pay tuition fees;
+  |\l|
+stop
+
+@enduml

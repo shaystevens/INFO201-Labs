@@ -1,0 +1,24 @@
+@startuml Hire 
+
+skinparam guillemet false
+skinparam classAttributeIconSize 0
+skinparam linetype ortho
+skinparam style strictuml
+skinparam classArrowFontSize 10
+skinparam classFontStyle bold
+skinparam SwimlaneBorderThickness 0
+
+skinparam activity {
+  hide empty description
+}
+
+|\t|
+start
+if (Instrument available?) then ([Yes])
+  :Give Instrument;
+  stop
+  else (\t[No])
+  stop
+
+
+@enduml
