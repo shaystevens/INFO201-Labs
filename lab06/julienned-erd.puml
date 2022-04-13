@@ -1,0 +1,84 @@
+@startuml julienned-erd
+
+skinparam Style StrictUML
+skinparam LineType ortho
+skinparam monochrome true
+
+class Student {
+    * Student_ID char(7)
+--
+    * Surname varchar(100)
+    * First_Name varchar(100)
+    * Email varchar(100) Must include an @ symbol and .
+    * Address varchar(100)
+    * Phone_Number int(15)
+}
+
+class Staff {
+    * Staff_ID char(7)
+--
+    * Surname varchar(100)
+    * First_Name varchar(100)
+    * Address varchar(100)
+    * Email varchar(100) Must include an @ symbol and .
+    * Qualifications varchar(100)
+    * Salary int(1000000)
+    * Home_phone_number int(15)
+    * Phone_Number int(15)
+}
+
+class Hire {
+    * Instrument_ID char(4)
+--
+    * Size A,B or C char(1)
+}
+
+class Audition {
+    * Audition_Number int(10000)
+--
+    * Date varchar(20) 
+    * Time 00:00 - 23:00 varchar(20)
+    * Student_ID char(7)
+    * Room varchar(100)
+    * Instrument varchar(100)
+    * Staff_ID1 char(7)
+    * Staff_ID2 char(7)
+      Staff_ID3 char(7)
+      Mark 0-100 int(100)
+      notes varchar(200)
+}
+
+class Class {
+    * Staff_ID char(7)
+    * Room varchar(100)
+--
+    * Class_Size int(100)
+}
+
+class Enrolment {
+    * Student_ID char(7)
+    * Instrument varchar(100)
+    * Class varchar(100)
+--
+    * Year int(10000) Must be >= 2022
+    * Fees_paid Yes/No varchar(3)
+    * Invoices varchar(100)
+    Scholarship varchar(100)
+}
+
+class Result {
+    * Student_ID char(7)
+    * Class varchar(100)
+--
+    * Mark 0-100 int(100)
+}
+
+Student ||-o{ Result
+Student ||-o{ Hire
+Student ||-o{ Enrolment
+Enrolment |o-|| Audition
+Enrolment }o-|| Class
+Staff ||-o{ Class
+Staff }|-o{ Audition
+
+@enduml

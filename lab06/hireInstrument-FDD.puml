@@ -1,0 +1,43 @@
+@startuml
+left to right direction
+
+skinparam recatngle {
+    RoundCorner<<relvar>> 0
+    BackgroundColor<<relvar>> whitesmoke
+
+    RoundCorner<<key>> 50
+    BackgroundColor<<key>> LemonChiffon
+    BorderColor<<key>> maroon
+}
+
+hide stereotype 
+
+rectangle Student <<relvar>> {
+
+    usecase "Student_ID" as Staff.StaffID
+
+    together {
+        usecase Surname
+        usecase First_Name
+        usecase Email
+        usecase Address
+        usecase Phone_number
+    }
+
+    Staff.StaffID --> Surname
+    Staff.StaffID --> First_Name
+    Staff.StaffID --> Email
+    Staff.StaffID --> Address
+    Staff.StaffID --> Phone_number
+}
+
+rectangle Hire <<relvar>> {
+    usecase "Instrument_ID" as Hire.InstrumentID
+
+    usecase Size
+
+    Hire.InstrumentID --> Size
+    
+}
+
+@enduml
