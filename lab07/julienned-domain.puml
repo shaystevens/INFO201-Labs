@@ -1,0 +1,77 @@
+@startuml juliennd
+
+' ======= Style / Layout Tweaks =======
+
+skinparam {
+  ' use conventional UML notation
+  Style StrictUML
+
+  ' use + and - characters instead of icons for showing visibility
+  ClassAttributeIconSize 0
+
+  ' less pointer corners
+  RoundCorner 5
+
+  ' make everything slightly less cramped
+  Padding 2
+
+  ' increase vertical spacing to make room for labels
+  RankSep 100
+
+  ' increase horizontal spacing to make room for labels
+  NodeSep 100
+}
+
+' ======= Classes =======
+
+class "Student" as student {
+  ' fields
+
+  - studentId : String <<unique>>
+  - familyName : String
+  - givenName : String
+  - phone : Interger 
+  - schoolEmail : String <<unique>>
+  - homeEmail : String <<unique>>
+  - secondaryInstruments : String
+
+--
+  ' methods
+}
+
+class "Degree_Enrolment" as degreeenrolment {
+  ' fields
+  - year : Integer
+  - degreeName : String
+  - enrolmentStatus : String
+  - feesPaid : Boolean
+--
+  'methods
+  + addDegreeEnrollment(StudentID : String)
+  + getDegreeEnrollment(StudentID : String)
+  
+}
+
+class "Class_Enrolment" as classenrolment {
+--
+   'methods
+   + addClassEnrollment(StudentID : String) 
+   + getClassEnrollement(StudentID : String)
+}
+
+class "Class" as class {
+    'fields
+    -classCode : String
+    -className : String
+    -classDescription : String
+}
+
+' ======= Relationships =======
+
+' Note: the \r is a right-aligned line break (\l is left-aligned, and \n is centred)
+student -> "- enrolls\r0..*" degreeenrolment
+degreeenrolment --> "- \r0..*"classenrolment
+class -> "- class\r0..*"classenrolment
+
+
+@enduml

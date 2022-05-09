@@ -1,0 +1,55 @@
+@startuml juliened sequence
+' === Style Tweaks ===
+
+skinparam {
+  Style StrictUML
+  RoundCorner 5
+  ParticipantPadding 10
+  Padding 2
+  SequenceStereotype {
+    Font {
+      Size 10
+      Style plain
+    }
+  }
+}
+
+' === Actors / Participants
+actor "User" as user
+participant "EnrollmentMenu" as menu <<form>>
+participant "EnrollStudentInDegree : EnrolStudentForm" as EnrollStudentInDegree <<form>>
+participant "dataStore : schoolDataStore" as dataStore <<data store>>
+participant "Student" as student <<domain>>
+
+' === Messages ===
+user -> menu : click "Enrol Student in Degree"
+menu++
+menu -> EnrollStudentInDegree : displayForm()
+EnrollStudentInDegree++
+
+EnrollStudentInDegree -> dataStore : getDegreeNames()
+dataStore++
+return degrees
+
+user -> EnrollStudentInDegree : enter Student ID
+
+user -> EnrollStudentInDegree : click "Find Student"
+EnrollStudentInDegree -> dataStore : findStudent(studentId)
+dataStore++
+create student
+dataStore -> student : <<construct from\ndatabase>>
+return student
+
+user -> EnrollStudentInDegree : click "Enrolment status"
+EnrollStudentInDegree -> dataStore : getDegreeEnrolmentStatuses()
+dataStore++
+return Enrolment Status
+
+user -> EnrollStudentInDegree : click "Save"
+EnrollStudentInDegree -> dataStore : saveEnrolment(enrolment), enrolStudentInDegree(student degreeEnrolment)
+dataStore++
+dataStore--
+return
+
+destroy EnrollStudentInDegree
+@enduml
